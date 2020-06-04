@@ -3,13 +3,15 @@ http://ionicframework.com/docs/theming/ */
 
 /** Ionic CSS Variables **/
 :root {
+  //--ion-background-color: #ff3700;
+
   /** primary **/
-  --ion-color-primary: #3880ff;
-  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary: #232C2A;
+  --ion-color-primary-rgb: 35,44,42;
   --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+  --ion-color-primary-contrast-rgb: 255,255,255;
+  --ion-color-primary-shade: #1f2725;
+  --ion-color-primary-tint: #39413f;
 
   /** secondary **/
   --ion-color-secondary: #3dc2ff;
@@ -225,4 +227,20 @@ http://ionicframework.com/docs/theming/ */
 
     --ion-tab-bar-background: #1f1f1f;
   }
+}
+
+ion-content {
+  --background: #F6F6F6;
+}
+
+ion-list {
+
+  &.list-md {
+    background: transparent;
+    padding: 0;
+  }
+}
+
+ion-list-header {
+  text-transform: uppercase;
 }

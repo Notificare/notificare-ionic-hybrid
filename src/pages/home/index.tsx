@@ -1,26 +1,32 @@
-import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { ExploreContainer } from '../../components/explore-container';
-import './index.scss';
+import React, { FC } from 'react';
+import { IonButton } from '@ionic/react';
+import { RouteComponentProps } from 'react-router';
+import { PageContainer } from '../../components/page-container';
 
-export const Home: React.FC = () => {
+export const Home: FC<HomeProps> = ({ history }) => {
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer />
-      </IonContent>
-    </IonPage>
+    <PageContainer title="Home">
+      <IonButton
+        expand="block"
+        onClick={(e) => {
+          e.preventDefault();
+          history.push('/inbox');
+        }}
+      >
+        Open Inbox
+      </IonButton>
+
+      <IonButton
+        expand="block"
+        onClick={(e) => {
+          e.preventDefault();
+          history.push('/settings');
+        }}
+      >
+        Open settings
+      </IonButton>
+    </PageContainer>
   );
 };
 
-export default Home;
+interface HomeProps extends RouteComponentProps {}
