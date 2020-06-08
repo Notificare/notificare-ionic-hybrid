@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
-import { IonInput, IonItem, IonLabel, IonSpinner } from '@ionic/react';
+import { IonImg, IonInput, IonItem, IonLabel, IonSpinner } from '@ionic/react';
+import HeaderImage from '../../assets/images/profits.png';
 import { Center } from '../../components/center';
 import { PageContainer } from '../../components/page-container';
 
@@ -15,6 +16,10 @@ export const Analytics: FC = () => {
           <IonSpinner />
         </Center>
       )}
+
+      <IonItem>
+        <IonImg src={HeaderImage} className="header-image ion-padding" />
+      </IonItem>
 
       <IonItem>
         <IonLabel position="floating">Event name</IonLabel>
