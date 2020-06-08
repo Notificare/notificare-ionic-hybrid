@@ -22,7 +22,7 @@ export const Analytics: FC = () => {
 
       setEvent('');
     } catch (e) {
-      await showAlertDialog(e.message);
+      await showAlertDialog(e);
     } finally {
       setLoading(false);
     }
