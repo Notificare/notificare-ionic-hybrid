@@ -1,3 +1,11 @@
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
 apply plugin: 'com.android.application'
 
 android {
@@ -7,13 +15,36 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [
+                appScheme       : 're.notifica',
+                notificareHost  : 'push.notifica.re',
+                notificareAppId : '5e845721b4f0f36c86bcb10a',
+                googleMapsApiKey: localProperties.getProperty('app.googleMapsApiKey'),
+        ]
     }
+
+    signingConfigs {
+        release {
+            storeFile file('release.keystore')
+            storePassword localProperties.getProperty('app.signing.store.password')
+            keyAlias localProperties.getProperty('app.signing.key.alias')
+            keyPassword localProperties.getProperty('app.signing.key.password')
+        }
+    }
+
     buildTypes {
+        debug {
+            manifestPlaceholders = [
+                    notificareAppId: '585702253cad4414df0e3b20',
+            ]
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }

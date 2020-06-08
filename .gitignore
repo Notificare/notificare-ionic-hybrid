@@ -24,3 +24,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Google services
+google-services.json
+
+# Notificare configuration
+notificareconfig.properties
+Notificare.plist
+
+# iOS secrets
+ios/Runner/Secrets.swift
