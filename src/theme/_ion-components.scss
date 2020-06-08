@@ -1,0 +1,15 @@
+ion-content {
+  --background: #F6F6F6;
+}
+
+ion-list {
+
+  &.list-md {
+    background: transparent;
+    padding: 0;
+  }
+}
+
+ion-list-header {
+  text-transform: uppercase;
+}

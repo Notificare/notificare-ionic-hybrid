@@ -1,9 +1,12 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
 
+@import "fonts";
+@import "ion-components";
+
 /** Ionic CSS Variables **/
 :root {
-  //--ion-background-color: #ff3700;
+  --ion-font-family: 'Proxima Nova', sans-serif !important;
 
   /** primary **/
   --ion-color-primary: #232C2A;
@@ -227,20 +230,4 @@ http://ionicframework.com/docs/theming/ */
 
     --ion-tab-bar-background: #1f1f1f;
   }
-}
-
-ion-content {
-  --background: #F6F6F6;
-}
-
-ion-list {
-
-  &.list-md {
-    background: transparent;
-    padding: 0;
-  }
-}
-
-ion-list-header {
-  text-transform: uppercase;
 }
