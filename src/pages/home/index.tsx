@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { PageContainer } from '../../components/page-container';
 
 export const Home: FC<HomeProps> = ({ history }) => {
-  const routes = ['inbox', 'settings', 'analytics', 'storage'];
+  const routes = ['inbox', 'settings', 'analytics', 'storage', 'sign-in', 'sign-up', 'forgot-password', 'profile'];
 
   return (
     <PageContainer title="Home">

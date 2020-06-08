@@ -7,6 +7,7 @@ import { Analytics } from './pages/analytics';
 import { Home } from './pages/home';
 import { Inbox } from './pages/inbox';
 import { Settings } from './pages/settings';
+import { SignIn } from './pages/sign-in';
 import { Storage } from './pages/storage';
 
 /* Core CSS required for Ionic components to work properly */
@@ -42,6 +43,7 @@ const App: React.FC = () => {
           <Route exact path="/settings" component={Settings} />
           <Route exact path="/analytics" component={Analytics} />
           <Route exact path="/storage" component={Storage} />
+          <Route exact path="/sign-in" component={SignIn} />
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>
