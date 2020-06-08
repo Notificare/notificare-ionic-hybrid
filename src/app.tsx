@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Notificare } from '@ionic-native/notificare';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
@@ -28,6 +29,9 @@ import '@ionic/react/css/display.css';
 import './theme/variables.scss';
 
 const App: React.FC = () => {
+  // Launch Notificare
+  useEffect(() => Notificare.launch(), []);
+
   return (
     <IonApp>
       <IonReactRouter>

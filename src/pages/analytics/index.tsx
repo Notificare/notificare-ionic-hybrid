@@ -1,17 +1,31 @@
 import React, { FC, useState } from 'react';
-import { IonImg, IonInput, IonItem, IonLabel, IonSpinner, IonButton } from '@ionic/react';
+import { Notificare } from '@ionic-native/notificare';
+import { IonButton, IonImg, IonInput, IonItem, IonLabel, IonSpinner } from '@ionic/react';
 import HeaderImage from '../../assets/images/profits.png';
 import { Center } from '../../components/center';
 import { PageContainer } from '../../components/page-container';
+import { showAlertDialog } from '../../lib/ui';
 
 export const Analytics: FC = () => {
   const [loading, setLoading] = useState(false);
-
   const [event, setEvent] = useState('');
 
   const onTrackEvent = async () => {
     try {
-    } catch (e) {}
+      setLoading(true);
+
+      await Notificare.logCustomEvent(event, {});
+
+      await showAlertDialog(
+        'Custom event registered successfully. Please check your dashboard to see the results for this event name.',
+      );
+
+      setEvent('');
+    } catch (e) {
+      await showAlertDialog(e.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
