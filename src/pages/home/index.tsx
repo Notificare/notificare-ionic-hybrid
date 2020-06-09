@@ -4,14 +4,24 @@ import { RouteComponentProps } from 'react-router';
 import { PageContainer } from '../../components/page-container';
 
 export const Home: FC<HomeProps> = ({ history }) => {
-  const routes = ['inbox', 'settings', 'analytics', 'storage', 'sign-in', 'sign-up', 'forgot-password', 'profile'];
+  const routes = [
+    { label: 'Inbox', route: '/inbox' },
+    { label: 'Settings', route: '/settings' },
+    { label: 'Analytics', route: '/analytics' },
+    { label: 'Storage', route: '/storage' },
+    { label: 'Sign in', route: '/sign-in' },
+    { label: 'Sign up', route: '/sign-up' },
+    { label: 'Forgot password', route: '/forgot-password' },
+    { label: 'Profile', route: '/profile' },
+    { label: 'Reset password', route: '/reset-password/aaaaaa' },
+  ];
 
   return (
     <PageContainer title="Home">
       <IonList lines="full">
-        {routes.map((value) => (
-          <IonItem key={value} button onClick={() => history.push(`/${value}`)}>
-            <IonLabel className="ion-text-capitalize">{value}</IonLabel>
+        {routes.map(({ label, route }, index) => (
+          <IonItem key={index} button onClick={() => history.push(route)}>
+            <IonLabel className="ion-text-capitalize">{label}</IonLabel>
           </IonItem>
         ))}
       </IonList>
