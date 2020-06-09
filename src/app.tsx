@@ -7,6 +7,7 @@ import { Analytics } from './pages/analytics';
 import { ForgotPassword } from './pages/forgot-password';
 import { Home } from './pages/home';
 import { Inbox } from './pages/inbox';
+import { Profile } from './pages/profile';
 import { ResetPassword } from './pages/reset-password';
 import { Settings } from './pages/settings';
 import { SignIn } from './pages/sign-in';
@@ -50,6 +51,7 @@ const App: React.FC = () => {
           <Route exact path="/sign-up" component={SignUp} />
           <Route exact path="/forgot-password" component={ForgotPassword} />
           <Route exact path="/reset-password/:token" component={ResetPassword} />
+          <Route exact path="/profile" component={Profile} />
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>

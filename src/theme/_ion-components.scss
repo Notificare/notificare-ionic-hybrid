@@ -13,3 +13,16 @@ ion-list {
 ion-list-header {
   text-transform: uppercase;
 }
+
+ion-item {
+  &.full-width {
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
+    padding: 0;
+
+    --inner-padding-start: 0;
+    --inner-padding-end: 0;
+  }
+}

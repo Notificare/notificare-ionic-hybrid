@@ -33,6 +33,7 @@
     "cordova-plugin-dialogs": "^2.0.2",
     "cordova-plugin-notificare-push": "^2.2.7",
     "ionicons": "^5.0.0",
+    "md5": "^2.2.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router": "^5.1.2",
