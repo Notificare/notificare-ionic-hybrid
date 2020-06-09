@@ -10,6 +10,10 @@
     <param name="ios-package" value="CDVNotification"/>
   </feature>
 
+  <feature name="EmailComposer">
+    <param name="ios-package" value="APPEmailComposer"/>
+  </feature>
+
   <feature name="NotificarePushLibCordova">
     <param name="ios-package" value="NotificarePushLibCordova"/>
     <param name="onload" value="true"/>
