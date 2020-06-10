@@ -7,9 +7,9 @@ export const Modal: FC<ModalProps> = ({ open, onClose, title, children }) => {
       <IonHeader translucent>
         <IonToolbar>
           <IonTitle>{title}</IonTitle>
-          <IonButtons slot="end">
-            <IonButton onClick={onClose}>
-              <IonIcon name="close" />
+          <IonButtons slot="start">
+            <IonButton shape="round" onClick={onClose}>
+              <IonIcon name="close" slot="icon-only" />
             </IonButton>
           </IonButtons>
         </IonToolbar>
