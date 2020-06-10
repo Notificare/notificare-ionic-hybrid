@@ -14,6 +14,7 @@ export const Home: FC<HomeProps> = ({ history }) => {
     { label: 'Forgot password', route: '/forgot-password' },
     { label: 'Profile', route: '/profile' },
     { label: 'Reset password', route: '/reset-password/aaaaaa' },
+    { label: 'Account validation', route: '/account-validation/aaaaaa' },
   ];
 
   return (

@@ -3,6 +3,7 @@ import { Notificare } from '@ionic-native/notificare';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
+import { AccountValidation } from './pages/account-validation';
 import { Analytics } from './pages/analytics';
 import { ChangePassword } from './pages/change-password';
 import { ForgotPassword } from './pages/forgot-password';
@@ -51,6 +52,7 @@ const App: React.FC = () => {
           <Route exact path="/sign-in" component={SignIn} />
           <Route exact path="/sign-up" component={SignUp} />
           <Route exact path="/forgot-password" component={ForgotPassword} />
+          <Route exact path="/account-validation/:token" component={AccountValidation} />
           <Route exact path="/reset-password/:token" component={ResetPassword} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/change-password" component={ChangePassword} />
