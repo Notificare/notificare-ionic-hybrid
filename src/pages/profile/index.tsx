@@ -164,7 +164,7 @@ const ProfileSuccess: FC<ProfileSuccessProps> = ({ history, user, preferences, o
         <IonLabel>Open member card</IonLabel>
       </IonItem>
 
-      <IonItem detail button>
+      <IonItem detail button onClick={() => history.push('/change-password')}>
         <IonLabel>Change password</IonLabel>
       </IonItem>
 

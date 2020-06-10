@@ -4,6 +4,7 @@ import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 import { Analytics } from './pages/analytics';
+import { ChangePassword } from './pages/change-password';
 import { ForgotPassword } from './pages/forgot-password';
 import { Home } from './pages/home';
 import { Inbox } from './pages/inbox';
@@ -52,6 +53,7 @@ const App: React.FC = () => {
           <Route exact path="/forgot-password" component={ForgotPassword} />
           <Route exact path="/reset-password/:token" component={ResetPassword} />
           <Route exact path="/profile" component={Profile} />
+          <Route exact path="/change-password" component={ChangePassword} />
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>
