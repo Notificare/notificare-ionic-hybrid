@@ -1,53 +1,36 @@
 import React, { FC, FormEvent, useState } from 'react';
+import { Notificare, NotificareAsset } from '@ionic-native/notificare';
 import { IonCol, IonGrid, IonRow, IonSearchbar, IonSpinner } from '@ionic/react';
 import { AssetItem } from '../../components/asset-item';
 import { Center } from '../../components/center';
 import { PageContainer } from '../../components/page-container';
 import { useNetworkRequest } from '../../lib/network-request';
-import { NotificareAsset } from '../../lib/notificare/models';
 
 export const Storage: FC = () => {
-  const [search, setSearch] = useState('');
-  const [request, requestActions] = useNetworkRequest(
-    () =>
-      new Promise<NotificareAsset[]>((resolve, reject) =>
-        resolve([
-          {
-            assetTitle: 'asdasd',
-            assetUrl: 'https://placekitten.com/g/200/300',
-          },
-          {
-            assetTitle: 'asdasd',
-            assetUrl: 'https://placekitten.com/g/200/300',
-          },
-          {
-            assetTitle: 'asdasd',
-            assetUrl: 'https://placekitten.com/g/200/300',
-          },
-          {
-            assetTitle: 'asdasd',
-            assetUrl: 'https://placekitten.com/g/200/300',
-          },
-          {
-            assetTitle: 'asdasd',
-            assetUrl: 'https://placekitten.com/g/200/300',
-          },
-          {
-            assetTitle: 'asdasd',
-            assetUrl: 'https://placekitten.com/g/200/300',
-          },
-          {
-            assetTitle: 'asdasd',
-            assetUrl: 'https://placekitten.com/g/200/300',
-          },
-        ]),
-      ),
-  );
+  const [search, setSearch] = useState('LANDSCAPES');
+  const [request, requestActions] = useNetworkRequest(() => Notificare.fetchAssets(search));
 
   const onSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     requestActions.start().catch(() => {});
+  };
+
+  const onShowAsset = async (asset: NotificareAsset) => {
+    const contentType = asset.assetMetaData?.contentType;
+    switch (contentType) {
+      case 'image/jpeg':
+      case 'image/gif':
+      case 'image/png':
+      case 'video/mp4':
+      case 'application/pdf':
+      case 'text/html':
+      case 'audio/mp3':
+        if (asset.assetUrl != null) {
+          window.open(asset.assetUrl);
+        }
+        break;
+    }
   };
 
   return (
@@ -77,12 +60,14 @@ export const Storage: FC = () => {
           <IonRow>
             {request.result.map((asset, index) => (
               <IonCol key={index} size="6">
-                <AssetItem asset={asset} />
+                <AssetItem asset={asset} onClick={() => onShowAsset(asset)} />
               </IonCol>
             ))}
           </IonRow>
         </IonGrid>
       )}
+
+      {request.status === 'failed' && <Center>Asset group not found.</Center>}
     </PageContainer>
   );
 };
