@@ -265,7 +265,7 @@ const ProfileSuccess: FC<ProfileSuccessProps> = ({ history, user, preferences, o
         <IonItem button detail onClick={onSendEmail}>
           <IonLabel>Push email</IonLabel>
           <IonLabel slot="end" className="ion-text-end">
-            <p>{user.accessToken}@pushmail.notifica.re</p>
+            <p>{user.accessToken}</p>
           </IonLabel>
         </IonItem>
 
