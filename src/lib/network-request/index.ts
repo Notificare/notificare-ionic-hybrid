@@ -25,7 +25,7 @@ export function useNetworkRequest<T>(
   const actions: MachineActions<T> = {
     start: async () => {
       // Prevent the request from being fired multiple times.
-      if (state.status == 'pending') {
+      if (state.status === 'pending') {
         console.log('This network request is already ongoing. Skipping...');
         return undefined;
       }
@@ -52,6 +52,7 @@ export function useNetworkRequest<T>(
       } catch (e) {
         // Transition to failed.
         setState({ status: 'failed', reason: e });
+        await options?.onFinished?.({ status: 'failed', reason: e });
 
         throw e;
       }
@@ -66,7 +67,7 @@ export function useNetworkRequest<T>(
         .then(() => console.debug('Automatic start finished successfully.'))
         .catch(() => console.debug('Automatic start finished with an error.'));
     }
-  }, [actions, options]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return [state, actions];
 }
