@@ -1,7 +1,7 @@
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useState } from 'react';
 import { AppVersion } from '@ionic-native/app-version';
 import { EmailComposer } from '@ionic-native/email-composer';
-import { Notificare, NotificareUser, NotificareUserPreference } from '@ionic-native/notificare';
+import { Notificare, NotificareUser, NotificareUserPreference, NotificareUserSegment } from '@ionic-native/notificare';
 import { IonImg, IonItem, IonLabel, IonList, IonListHeader, IonSpinner, IonToggle } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
 import { Center } from '../../components/center';
@@ -56,6 +56,14 @@ interface ProfileProps extends RouteComponentProps {}
 // region Internal profile
 
 const ProfileSuccess: FC<ProfileSuccessProps> = ({ history, user, preferences, onRefreshSignal }) => {
+  const [toggles, setToggles] = useState<Record<string, boolean>>(
+    Object.fromEntries(
+      preferences
+        .filter((preference) => preference.preferenceType === 'single')
+        .map((preference) => [preference.preferenceId, preference.preferenceOptions[0].selected]),
+    ),
+  );
+
   const renderPreference = (preference: NotificareUserPreference) => (
     <>
       {preference.preferenceType === 'choice' && (
@@ -70,7 +78,14 @@ const ProfileSuccess: FC<ProfileSuccessProps> = ({ history, user, preferences, o
       {preference.preferenceType === 'single' && (
         <IonItem>
           <IonLabel>{preference.preferenceLabel}</IonLabel>
-          <IonToggle slot="end" checked={preference.preferenceOptions[0].selected} />
+          <IonToggle
+            slot="end"
+            checked={toggles[preference.preferenceId]}
+            onIonChange={async (e) => {
+              setToggles((prevState) => ({ ...prevState, [preference.preferenceId]: e.detail.checked }));
+              await onUpdateSinglePreference(preference, e.detail.checked);
+            }}
+          />
         </IonItem>
       )}
 
@@ -126,6 +141,29 @@ const ProfileSuccess: FC<ProfileSuccessProps> = ({ history, user, preferences, o
       history.goBack();
     } catch (e) {
       await showAlertDialog('Could not sign you out.', {
+        onDismiss: () => onRefreshSignal(),
+      });
+    }
+  };
+
+  const onUpdateSinglePreference = async (preference: NotificareUserPreference, selected: boolean) => {
+    try {
+      const option = preference.preferenceOptions[0];
+
+      const segment: NotificareUserSegment = {
+        segmentId: option.segmentId,
+        segmentLabel: option.segmentLabel,
+      };
+
+      if (selected) {
+        await Notificare.addSegmentToUserPreference(segment, preference);
+      } else {
+        await Notificare.removeSegmentFromUserPreference(segment, preference);
+      }
+
+      onRefreshSignal();
+    } catch (e) {
+      await showAlertDialog(`Failed to update user preference: ${e}`, {
         onDismiss: () => onRefreshSignal(),
       });
     }
