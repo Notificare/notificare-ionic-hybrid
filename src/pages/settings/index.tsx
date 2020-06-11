@@ -1,8 +1,37 @@
 import React, { FC } from 'react';
+import { EmailComposer } from '@ionic-native/email-composer';
 import { IonItem, IonLabel, IonList, IonListHeader, IonToggle } from '@ionic/react';
 import { PageContainer } from '../../components/page-container';
+import { showAlertDialog } from '../../lib/ui';
+import { getDemoSourceConfig } from '../../lib/utils/storage';
 
 export const Settings: FC = () => {
+  // region Actions
+
+  const onSendFeedback = async () => {
+    try {
+      const available = await EmailComposer.isAvailable();
+      if (!available) {
+        await showAlertDialog('There is no email client available.');
+        return;
+      }
+
+      const demoSourceConfig = await getDemoSourceConfig();
+      if (demoSourceConfig == null) return;
+
+      await EmailComposer.open({
+        to: demoSourceConfig.email.split(','),
+        subject: 'your_subject',
+        body: 'your_message',
+        isHtml: false,
+      });
+    } catch (e) {
+      await showAlertDialog('Could not open the email client.');
+    }
+  };
+
+  // endregion
+
   return (
     <PageContainer title="Settings">
       <IonList lines="full">
@@ -90,7 +119,7 @@ export const Settings: FC = () => {
 
         <IonListHeader lines="full">About this app</IonListHeader>
 
-        <IonItem button detail onClick={() => {}}>
+        <IonItem button detail onClick={onSendFeedback}>
           <IonLabel>
             <h2>Leave your feedback</h2>
           </IonLabel>
