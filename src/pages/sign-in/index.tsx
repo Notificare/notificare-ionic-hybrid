@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Notificare } from '@ionic-native/notificare';
 import { IonButton, IonImg, IonInput, IonItem, IonLabel, IonSpinner } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
@@ -9,10 +9,17 @@ import { createMemberCard } from '../../lib/loyalty';
 import { useNetworkRequest } from '../../lib/network-request';
 import { showAlertDialog } from '../../lib/ui';
 
-export const SignIn: FC<SignInProps> = ({ history }) => {
+export const SignIn: FC<SignInProps> = ({ history, match }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [request, requestActions] = useNetworkRequest(() => loginWithMemberCard());
+
+  // Redirecting on a ProtectedRoute causes the component to update if it has been previously mounted thus preserving
+  // its state. We need to wipe it out when navigating back to the component otherwise the request status remains
+  // completed.
+  useEffect(() => {
+    requestActions.reset();
+  }, [match, requestActions]);
 
   const loginWithMemberCard = async () => {
     await Notificare.login(email, password);
@@ -20,8 +27,6 @@ export const SignIn: FC<SignInProps> = ({ history }) => {
 
     // Create and update the current member card
     await createMemberCard(user.userName, user.userID);
-
-    history.replace('/profile');
   };
 
   const onLogin = async () => {
@@ -35,6 +40,8 @@ export const SignIn: FC<SignInProps> = ({ history }) => {
 
     try {
       await requestActions.start();
+      setEmail('');
+      setPassword('');
       history.replace('/profile');
     } catch (e) {
       await showAlertDialog('Invalid credentials.');

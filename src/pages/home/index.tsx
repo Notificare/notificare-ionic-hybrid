@@ -13,6 +13,7 @@ export const Home: FC<HomeProps> = ({ history }) => {
     { label: 'Sign up', route: '/sign-up' },
     { label: 'Forgot password', route: '/forgot-password' },
     { label: 'Profile', route: '/profile' },
+    { label: 'Member card', route: '/member-card' },
     { label: 'Reset password', route: '/reset-password/aaaaaa' },
     { label: 'Account validation', route: '/account-validation/aaaaaa' },
   ];

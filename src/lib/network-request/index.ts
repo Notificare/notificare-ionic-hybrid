@@ -6,6 +6,7 @@ export type FinishedMachineState<T> = { status: 'successful'; result: T } | { st
 
 export interface MachineActions<T> {
   start: () => Promise<T | undefined>;
+  reset: () => void;
 }
 
 export interface MachineOptions<T> {
@@ -56,6 +57,9 @@ export function useNetworkRequest<T>(
 
         throw e;
       }
+    },
+    reset: () => {
+      setState({ status: 'idle' });
     },
   };
 

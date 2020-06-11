@@ -1,24 +1,29 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { useHistory } from 'react-router';
 
-export const PageContainer: FC<PageContainerProps> = ({ title, children }) => {
-  const history = useHistory();
-  const canGoBack = history.length > 1;
+export const PageContainer: FC<PageContainerProps> = ({ title, noHeader, children }) => {
+  const [className, setClassName] = useState<string>();
+  useEffect(() => setClassName('ion-page-upon-mounting'), []);
+
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar color="primary">
-          <IonTitle>{title}</IonTitle>
+    <IonPage className={className}>
+      {!Boolean(noHeader) && (
+        <IonHeader>
+          <IonToolbar color="primary">
+            <IonTitle>{title}</IonTitle>
 
-          <IonButtons slot="start">{canGoBack && <IonBackButton />}</IonButtons>
-        </IonToolbar>
-      </IonHeader>
+            <IonButtons slot="start">
+              <IonBackButton />
+            </IonButtons>
+          </IonToolbar>
+        </IonHeader>
+      )}
       <IonContent>{children}</IonContent>
     </IonPage>
   );
 };
 
 interface PageContainerProps {
-  title: string;
+  title?: string;
+  noHeader?: boolean;
 }
