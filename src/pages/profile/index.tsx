@@ -66,6 +66,16 @@ export const Profile: FC<ProfileProps> = ({ history }) => {
           onRefreshSignal={reloadProfile}
         />
       )}
+
+      {request.status === 'failed' && (
+        <Center>
+          <p>
+            Failed to load your profile...
+            <br />
+            <small>{request.reason}</small>
+          </p>
+        </Center>
+      )}
     </PageContainer>
   );
 };
