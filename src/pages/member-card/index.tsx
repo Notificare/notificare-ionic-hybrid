@@ -21,7 +21,11 @@ export const MemberCard: FC<MemberCardProps> = () => {
       )}
 
       {request.status === 'successful' && (
-        <iframe src={`https://push.notifica.re/pass/web/${request.result}?showWebVersion=1`} className="full-iframe" />
+        <iframe
+          title="Member card"
+          src={`https://push.notifica.re/pass/web/${request.result}?showWebVersion=1`}
+          className="full-iframe"
+        />
       )}
     </PageContainer>
   );
