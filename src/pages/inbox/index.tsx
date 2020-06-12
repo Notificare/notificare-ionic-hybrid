@@ -96,6 +96,10 @@ export const Inbox: FC<InboxProps> = () => {
 
   useEffect(() => reloadData(), []);
 
+  useEffect(() => {
+    Notificare.on('inboxLoaded', (data) => setState({ loading: false, data }));
+  }, []);
+
   return (
     <PageContainer
       title="Inbox"

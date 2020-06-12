@@ -39,7 +39,28 @@ import './theme/variables.scss';
 
 const App: React.FC = () => {
   // Launch Notificare
-  useEffect(() => Notificare.launch(), []);
+  useEffect(() => {
+    Notificare.launch();
+
+    Notificare.on('ready', async (data) => {
+      console.log('Notificare is now ready.');
+
+      try {
+        if (await Notificare.isRemoteNotificationsEnabled()) {
+          console.debug('Remote notifications are enabled. Registering for notifications...');
+          Notificare.registerForNotifications();
+        }
+
+        if (await Notificare.isLocationServicesEnabled()) {
+          console.debug('Location services are enabled. Start location updates & beacons...');
+          Notificare.startLocationUpdates();
+          Notificare.enableBeacons();
+        }
+      } catch (e) {
+        console.log(`Something went wrong: ${e}`);
+      }
+    });
+  }, []);
 
   return (
     <IonApp>

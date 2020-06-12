@@ -100,6 +100,15 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${googleMapsApiKey}" />
+
+        <service
+            android:name="re.notifica.push.fcm.PushService"
+            android:exported="false"
+            android:label="Notificare Push Service" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
     <!-- Permissions -->
