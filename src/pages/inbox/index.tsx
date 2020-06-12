@@ -21,6 +21,17 @@ export const Inbox: FC<InboxProps> = () => {
       .catch(() => setState({ loading: false, data: [] }));
   };
 
+  const onItemClick = (item: NotificareInboxItem) => {
+    if (selectedItems.length > 0) {
+      onItemLongPress(item);
+      return;
+    }
+
+    Notificare.presentInboxItem(item);
+  };
+
+  const onItemLongPress = (item: NotificareInboxItem) => {};
+
   useEffect(() => reloadData(), []);
 
   return (
@@ -42,7 +53,12 @@ export const Inbox: FC<InboxProps> = () => {
           {state.data.length > 0 && (
             <IonList lines="full">
               {state.data.map((value, index) => (
-                <InboxItem key={index} item={value} selected={selectedItems.indexOf(value) > -1} onClick={() => {}} />
+                <InboxItem
+                  key={index}
+                  item={value}
+                  selected={selectedItems.indexOf(value) > -1}
+                  onClick={() => onItemClick(value)}
+                />
               ))}
             </IonList>
           )}
