@@ -19,7 +19,7 @@ export const SignIn: FC<SignInProps> = ({ history, match }) => {
   // completed.
   useEffect(() => {
     requestActions.reset();
-  }, [match, requestActions]);
+  }, [match]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const loginWithMemberCard = async () => {
     await Notificare.login(email, password);
