@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, ReactElement, useEffect, useState } from 'react';
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 
-export const PageContainer: FC<PageContainerProps> = ({ title, noHeader, children }) => {
+export const PageContainer: FC<PageContainerProps> = ({ title, noHeader, rightButtons, children }) => {
   const [className, setClassName] = useState<string>();
   useEffect(() => setClassName('ion-page-upon-mounting'), []);
 
@@ -15,6 +15,8 @@ export const PageContainer: FC<PageContainerProps> = ({ title, noHeader, childre
             <IonButtons slot="start">
               <IonBackButton />
             </IonButtons>
+
+            {rightButtons && <IonButtons slot="end">{rightButtons}</IonButtons>}
           </IonToolbar>
         </IonHeader>
       )}
@@ -26,4 +28,5 @@ export const PageContainer: FC<PageContainerProps> = ({ title, noHeader, childre
 interface PageContainerProps {
   title?: string;
   noHeader?: boolean;
+  rightButtons?: ReactElement;
 }
