@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { AppVersion } from '@ionic-native/app-version';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { Notificare, NotificareDeviceDnD } from '@ionic-native/notificare';
-import { IonItem, IonLabel, IonList, IonListHeader, IonSpinner, IonToggle } from '@ionic/react';
+import { IonDatetime, IonItem, IonLabel, IonList, IonListHeader, IonSpinner, IonToggle } from '@ionic/react';
 import { Center } from '../../components/center';
 import { PageContainer } from '../../components/page-container';
 import { useNetworkRequest } from '../../lib/network-request';
@@ -203,21 +203,35 @@ export const Settings: FC = () => {
               {request.result.dnd?.start != null && request.result.dnd?.end != null && (
                 <>
                   <IonItem>
-                    <IonLabel>
-                      <h2>From</h2>
-                    </IonLabel>
-                    <IonLabel className="ion-text-end" slot="end">
-                      <p>{request.result.dnd.start}</p>
-                    </IonLabel>
+                    <IonLabel>From</IonLabel>
+                    <IonDatetime
+                      style={{ fontSize: 14, color: '#808289' }}
+                      displayFormat="HH:mm"
+                      pickerFormat="HH:mm"
+                      value={request.result.dnd.start}
+                      onIonChange={(e) => {
+                        const start = e.detail.value!;
+                        const end = request.result.dnd?.end;
+
+                        updateDnD(true, start, end).catch((e) => `Failed to update DND: ${e}`);
+                      }}
+                    />
                   </IonItem>
 
                   <IonItem>
-                    <IonLabel>
-                      <h2>To</h2>
-                    </IonLabel>
-                    <IonLabel className="ion-text-end" slot="end">
-                      <p>{request.result.dnd.end}</p>
-                    </IonLabel>
+                    <IonLabel>To</IonLabel>
+                    <IonDatetime
+                      style={{ fontSize: 14, color: '#808289' }}
+                      displayFormat="HH:mm"
+                      pickerFormat="HH:mm"
+                      value={request.result.dnd.end}
+                      onIonChange={(e) => {
+                        const start = request.result.dnd?.start;
+                        const end = e.detail.value!;
+
+                        updateDnD(true, start, end).catch((e) => `Failed to update DND: ${e}`);
+                      }}
+                    />
                   </IonItem>
                 </>
               )}
