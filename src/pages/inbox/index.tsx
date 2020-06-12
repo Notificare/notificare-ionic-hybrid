@@ -17,10 +17,7 @@ export const Inbox: FC<InboxProps> = () => {
     setState({ loading: true, data: [] });
 
     Notificare.fetchInbox()
-      .then((data) => {
-        console.log(`-----> Inbox data: ${JSON.stringify(data, null, 2)}`);
-        setState({ loading: false, data });
-      })
+      .then((data) => setState({ loading: false, data }))
       .catch(() => setState({ loading: false, data: [] }));
   };
 
