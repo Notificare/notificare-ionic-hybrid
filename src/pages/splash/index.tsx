@@ -37,7 +37,7 @@ export const Splash: FC<SplashProps> = ({ history }) => {
 
         const introShown = await getOnboardingStatus();
         console.log(`introShown: ${introShown}`);
-        history.replace(introShown ? 'home' : 'onboarding');
+        history.replace(introShown ? '/home' : '/onboarding');
       } catch (e) {
         console.log(`Something went wrong: ${e}`);
         Plugins.App.exitApp();
