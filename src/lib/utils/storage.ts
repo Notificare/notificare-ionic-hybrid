@@ -7,8 +7,8 @@ const KEY_MEMBER_CARD_TEMPLATE = 'member_card_template';
 const KEY_MEMBER_CARD_SERIAL = 'member_card_serial';
 
 export async function getOnboardingStatus(): Promise<boolean> {
-  const status = await Storage.get({ key: KEY_ONBOARDING_STATUS });
-  return Boolean(status);
+  const { value } = await Storage.get({ key: KEY_ONBOARDING_STATUS });
+  return Boolean(value);
 }
 
 export async function setOnboardingStatus(status: boolean): Promise<void> {

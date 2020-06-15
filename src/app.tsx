@@ -11,11 +11,13 @@ import { ForgotPassword } from './pages/forgot-password';
 import { Home } from './pages/home';
 import { Inbox } from './pages/inbox';
 import { MemberCard } from './pages/member-card';
+import { Onboarding } from './pages/onboarding';
 import { Profile } from './pages/profile';
 import { ResetPassword } from './pages/reset-password';
 import { Settings } from './pages/settings';
 import { SignIn } from './pages/sign-in';
 import { SignUp } from './pages/sign-up';
+import { Splash } from './pages/splash';
 import { Storage } from './pages/storage';
 
 /* Core CSS required for Ionic components to work properly */
@@ -66,7 +68,9 @@ const App: React.FC = () => {
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
-          <Route exact path="/" render={() => <Redirect to="/home" />} />
+          <Route exact path="/" render={() => <Redirect to="/splash" />} />
+          <Route exact path="/splash" component={Splash} />
+          <Route exact path="/onboarding" component={Onboarding} />
           <Route exact path="/home" component={Home} />
           <Route exact path="/inbox" component={Inbox} />
           <Route exact path="/settings" component={Settings} />
