@@ -18,6 +18,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev:android": "ionic capacitor run android -l --external",
+    "dev:ios": "ionic capacitor run ios -l --external",
     "lint": "eslint 'src/**/*.{ts,tsx}' --fix",
     "postinstall": "jetifier"
   },
