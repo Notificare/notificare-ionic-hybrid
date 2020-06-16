@@ -10,10 +10,10 @@ import { useNetworkRequest } from '../../lib/network-request';
 import { showAlertDialog } from '../../lib/ui';
 
 export const SignUp: FC<SignUpProps> = ({ history }) => {
-  const [name, setName] = useState('Helder');
-  const [email, setEmail] = useState('helder@notifica.re');
-  const [password, setPassword] = useState('123asd');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('123asd');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [request, requestActions] = useNetworkRequest(() => registerWithMemberCard());
 
   const registerWithMemberCard = async () => {
