@@ -6,6 +6,7 @@ import { Redirect, Route } from 'react-router-dom';
 import { ProtectedRoute } from './components/protected-route';
 import { AccountValidation } from './pages/account-validation';
 import { Analytics } from './pages/analytics';
+import { Beacons } from './pages/beacons';
 import { ChangePassword } from './pages/change-password';
 import { ForgotPassword } from './pages/forgot-password';
 import { Home } from './pages/home';
@@ -74,6 +75,7 @@ const App: React.FC = () => {
           <Route exact path="/home" component={Home} />
           <Route exact path="/inbox" component={Inbox} />
           <Route exact path="/settings" component={Settings} />
+          <Route exact path="/beacons" component={Beacons} />
           <Route exact path="/analytics" component={Analytics} />
           <Route exact path="/storage" component={Storage} />
           <Route exact path="/sign-in" component={SignIn} />
