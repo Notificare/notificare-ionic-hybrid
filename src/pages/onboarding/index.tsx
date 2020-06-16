@@ -37,7 +37,7 @@ export const Onboarding: FC<OnboardingProps> = ({ history }) => {
 
   const startLocationUpdates = async () => {
     const result = await Diagnostic.getLocationAuthorizationStatus();
-    if (result != Diagnostic.permissionStatus.GRANTED) {
+    if (result !== Diagnostic.permissionStatus.GRANTED) {
       const granted = await Diagnostic.requestLocationAuthorization(Diagnostic.locationAuthorizationMode.ALWAYS);
       if (!granted) {
         console.log('The user did not grant the location permission.');
