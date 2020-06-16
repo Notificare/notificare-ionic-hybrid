@@ -29,7 +29,7 @@ export const Splash: FC<SplashProps> = ({ history }) => {
   useEffect(() => {
     Notificare.on('ready', async () => {
       try {
-        await Notificare.addTag('react-native');
+        await Notificare.addTag('ionic');
 
         await fetchConfig();
         await fetchCustomScript();

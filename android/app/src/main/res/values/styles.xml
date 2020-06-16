@@ -17,7 +17,7 @@
 
 
     <style name="AppTheme.NoActionBarLaunch" parent="AppTheme.NoActionBar">
-        <item name="android:background">@drawable/splash</item>
+        <item name="android:background">@android:color/white</item>
     </style>
 
     <style name="AppTheme.Translucent" parent="AppTheme">
