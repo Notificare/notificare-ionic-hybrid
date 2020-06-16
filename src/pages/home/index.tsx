@@ -4,9 +4,15 @@ import { AppUrlOpen, Plugins } from '@capacitor/core';
 import { Notificare } from '@ionic-native/notificare';
 import { RouteComponentProps } from 'react-router';
 import { PageContainer } from '../../components/page-container';
+import { useNetworkRequest } from '../../lib/network-request';
 import { showAlertDialog } from '../../lib/ui';
+import { getDemoSourceConfig } from '../../lib/utils/storage';
 
 export const Home: FC<HomeProps> = ({ history }) => {
+  const [request] = useNetworkRequest(() => getDemoSourceConfig(), {
+    autoStart: true,
+  });
+
   useEffect(() => {
     // Deep links
     Plugins.App.addListener('appUrlOpen', (data: AppUrlOpen) => handleDeepLink(data.url));
@@ -55,7 +61,9 @@ export const Home: FC<HomeProps> = ({ history }) => {
 
   return (
     <PageContainer noHeader>
-      <iframe title="Home" src={`https://demo.notificare.com/hybrid-app`} className="full-iframe" />
+      {request.status === 'successful' && request.result && (
+        <iframe title="Home" src={request.result.url} className="full-iframe" />
+      )}
     </PageContainer>
   );
 };
