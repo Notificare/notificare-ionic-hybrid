@@ -14,6 +14,7 @@ import { Inbox } from './pages/inbox';
 import { MemberCard } from './pages/member-card';
 import { Onboarding } from './pages/onboarding';
 import { Profile } from './pages/profile';
+import { Regions } from './pages/regions';
 import { ResetPassword } from './pages/reset-password';
 import { Settings } from './pages/settings';
 import { SignIn } from './pages/sign-in';
@@ -75,6 +76,7 @@ const App: React.FC = () => {
           <Route exact path="/home" component={Home} />
           <Route exact path="/inbox" component={Inbox} />
           <Route exact path="/settings" component={Settings} />
+          <Route exact path="/regions" component={Regions} />
           <Route exact path="/beacons" component={Beacons} />
           <Route exact path="/analytics" component={Analytics} />
           <Route exact path="/storage" component={Storage} />
