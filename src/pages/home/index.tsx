@@ -5,7 +5,6 @@ import { Notificare } from '@ionic-native/notificare';
 import { RouteComponentProps } from 'react-router';
 import { PageContainer } from '../../components/page-container';
 import { showAlertDialog } from '../../lib/ui';
-import { trimSlashes } from '../../lib/utils';
 
 export const Home: FC<HomeProps> = ({ history }) => {
   useEffect(() => {
@@ -37,16 +36,16 @@ export const Home: FC<HomeProps> = ({ history }) => {
       case '/profile':
       case '/analytics':
       case '/storage':
-        history.push(trimSlashes(url.path));
+        history.push(url.path);
         break;
       case '/membercard':
-        history.push('member-card');
+        history.push('/member-card');
         break;
       case '/signin':
-        history.push('sign-in');
+        history.push('/sign-in');
         break;
       case '/signup':
-        history.push('sign-up');
+        history.push('/sign-up');
         break;
       case '/scan':
         Notificare.startScannableSession();
