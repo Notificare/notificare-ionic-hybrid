@@ -39,7 +39,7 @@
     "cordova-plugin-dialogs": "^2.0.2",
     "cordova-plugin-email-composer": "^0.9.2",
     "cordova-plugin-file": "^6.0.2",
-    "cordova-plugin-notificare-push": "file:../notificare-push-lib-cordova",
+    "cordova-plugin-notificare-push": "^2.3.0",
     "cordova.plugins.diagnostic": "^5.0.2",
     "ionicons": "^5.0.0",
     "jetifier": "^1.6.5",
