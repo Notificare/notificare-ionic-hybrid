@@ -10,6 +10,7 @@ export const Regions: FC<RegionsProps> = () => {
         There is no Capacitor support for Google Maps at the time of development.
         <br />
         <small>
+          {/* eslint-disable-next-line react/jsx-no-target-blank */}
           <a href="https://github.com/mapsplugin/cordova-plugin-googlemaps/issues/2781" target="_blank">
             Keep track of the issue
           </a>

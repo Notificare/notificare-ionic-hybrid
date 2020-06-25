@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useRef } from 'react';
-import { NotificareInboxItem } from '@ionic-native/notificare';
 import { createGesture, IonImg, IonItem, IonLabel, IonThumbnail } from '@ionic/react';
 import TimeAgo from 'react-timeago';
 import NoAttachmentImage from '../../assets/images/no_attachment.png';
@@ -51,7 +50,7 @@ export const InboxItem: FC<InboxItemProps> = ({ item, selected, onClick, onLongP
 };
 
 interface InboxItemProps {
-  item: NotificareInboxItem;
+  item: any;
   selected: boolean;
   onClick: () => void;
   onLongPress: () => void;

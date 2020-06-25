@@ -1,5 +1,5 @@
 import React, { FC, FormEvent, useState } from 'react';
-import { Notificare, NotificareAsset } from '@ionic-native/notificare';
+import { Notificare } from '@ionic-native/notificare';
 import { IonCol, IonGrid, IonRow, IonSearchbar, IonSpinner } from '@ionic/react';
 import { AssetItem } from '../../components/asset-item';
 import { Center } from '../../components/center';
@@ -16,7 +16,7 @@ export const Storage: FC = () => {
     requestActions.start().catch(() => {});
   };
 
-  const onShowAsset = async (asset: NotificareAsset) => {
+  const onShowAsset = async (asset: any) => {
     const contentType = asset.assetMetaData?.contentType;
     switch (contentType) {
       case 'image/jpeg':

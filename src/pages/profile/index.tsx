@@ -1,13 +1,7 @@
 import React, { FC, Fragment, useState } from 'react';
 import { AppVersion } from '@ionic-native/app-version';
 import { EmailComposer } from '@ionic-native/email-composer';
-import {
-  Notificare,
-  NotificareUser,
-  NotificareUserPreference,
-  NotificareUserPreferenceOption,
-  NotificareUserSegment,
-} from '@ionic-native/notificare';
+import { Notificare } from '@ionic-native/notificare';
 import {
   IonButton,
   IonCheckbox,
@@ -93,15 +87,15 @@ const ProfileSuccess: FC<ProfileSuccessProps> = ({ history, user, preferences, o
     ),
   );
 
-  const [currentPreference, setCurrentPreference] = useState<NotificareUserPreference>();
+  const [currentPreference, setCurrentPreference] = useState<any>();
 
-  const renderPreference = (preference: NotificareUserPreference) => (
+  const renderPreference = (preference: any) => (
     <>
       {preference.preferenceType === 'choice' && (
         <IonItem detail button onClick={() => setCurrentPreference(preference)}>
           <IonLabel>{preference.preferenceLabel}</IonLabel>
           <IonLabel slot="end" className="ion-text-end">
-            <p>{preference.preferenceOptions.find((option) => option.selected)?.segmentLabel}</p>
+            <p>{preference.preferenceOptions.find((option: any) => option.selected)?.segmentLabel}</p>
           </IonLabel>
         </IonItem>
       )}
@@ -124,7 +118,7 @@ const ProfileSuccess: FC<ProfileSuccessProps> = ({ history, user, preferences, o
         <IonItem detail button onClick={() => setCurrentPreference(preference)}>
           <IonLabel>{preference.preferenceLabel}</IonLabel>
           <IonLabel slot="end" className="ion-text-end">
-            <p>{preference.preferenceOptions.filter((option) => option.selected).length}</p>
+            <p>{preference.preferenceOptions.filter((option: any) => option.selected).length}</p>
           </IonLabel>
         </IonItem>
       )}
@@ -177,11 +171,11 @@ const ProfileSuccess: FC<ProfileSuccessProps> = ({ history, user, preferences, o
     }
   };
 
-  const onUpdateSinglePreference = async (preference: NotificareUserPreference, selected: boolean) => {
+  const onUpdateSinglePreference = async (preference: any, selected: boolean) => {
     try {
       const option = preference.preferenceOptions[0];
 
-      const segment: NotificareUserSegment = {
+      const segment = {
         segmentId: option.segmentId,
         segmentLabel: option.segmentLabel,
       };
@@ -200,12 +194,9 @@ const ProfileSuccess: FC<ProfileSuccessProps> = ({ history, user, preferences, o
     }
   };
 
-  const onUpdateChoicePreference = async (
-    preference: NotificareUserPreference,
-    option: NotificareUserPreferenceOption,
-  ) => {
+  const onUpdateChoicePreference = async (preference: any, option: any) => {
     try {
-      const segment: NotificareUserSegment = {
+      const segment = {
         segmentId: option.segmentId,
         segmentLabel: option.segmentLabel,
       };
@@ -220,19 +211,15 @@ const ProfileSuccess: FC<ProfileSuccessProps> = ({ history, user, preferences, o
     }
   };
 
-  const onUpdateSelectPreference = async (
-    preference: NotificareUserPreference,
-    options: NotificareUserPreferenceOption[],
-  ) => {
+  const onUpdateSelectPreference = async (preference: any, options: any[]) => {
     try {
       for (let option of preference.preferenceOptions) {
-        const segment: NotificareUserSegment = {
+        const segment = {
           segmentId: option.segmentId,
           segmentLabel: option.segmentLabel,
         };
 
         const isSelected = options.find((opt) => opt.segmentId === option.segmentId) != null;
-        console.log(`${option.segmentLabel} isSelected: ${isSelected}`);
 
         if (isSelected) {
           await Notificare.addSegmentToUserPreference(segment, preference);
@@ -325,8 +312,8 @@ const ProfileSuccess: FC<ProfileSuccessProps> = ({ history, user, preferences, o
 };
 
 interface ProfileSuccessProps extends Pick<ProfileProps, 'history'> {
-  user: NotificareUser;
-  preferences: NotificareUserPreference[];
+  user: any;
+  preferences: any[];
   onRefreshSignal: () => void;
 }
 
@@ -335,11 +322,13 @@ interface ProfileSuccessProps extends Pick<ProfileProps, 'history'> {
 // region Preference pickers
 
 const ChoicePreferencePicker: FC<ChoicePreferencePickerProps> = ({ preference, onChange }) => {
-  const [selectedChoice, setSelectedChoice] = useState(preference.preferenceOptions.find((option) => option.selected));
+  const [selectedChoice, setSelectedChoice] = useState(
+    preference.preferenceOptions.find((option: any) => option.selected),
+  );
 
   return (
     <IonList lines="full">
-      {preference.preferenceOptions.map((option, index) => (
+      {preference.preferenceOptions.map((option: any, index: number) => (
         <IonItem
           key={index}
           button
@@ -359,25 +348,25 @@ const ChoicePreferencePicker: FC<ChoicePreferencePickerProps> = ({ preference, o
 };
 
 interface ChoicePreferencePickerProps {
-  preference: NotificareUserPreference;
-  onChange: (preference: NotificareUserPreference, option: NotificareUserPreferenceOption) => void;
+  preference: any;
+  onChange: (preference: any, option: any) => void;
 }
 
 const SelectPreferencePicker: FC<SelectPreferencePickerProps> = ({ preference, onChange }) => {
   const [selectedOptions, setSelectedOptions] = useState(
-    preference.preferenceOptions.filter((option) => option.selected),
+    preference.preferenceOptions.filter((option: any) => option.selected),
   );
 
   return (
     <IonList lines="full">
-      {preference.preferenceOptions.map((option, index) => (
+      {preference.preferenceOptions.map((option: any, index: number) => (
         <IonItem key={index}>
           <IonLabel>{option.segmentLabel}</IonLabel>
           <IonCheckbox
             slot="end"
-            checked={selectedOptions.find((opt) => opt.segmentId === option.segmentId)?.selected ?? false}
+            checked={selectedOptions.find((opt: any) => opt.segmentId === option.segmentId)?.selected ?? false}
             onIonChange={(e) => {
-              setSelectedOptions((prevState) => {
+              setSelectedOptions((prevState: any[]) => {
                 if (e.detail.checked) {
                   prevState.push(option);
 
@@ -402,8 +391,8 @@ const SelectPreferencePicker: FC<SelectPreferencePickerProps> = ({ preference, o
 };
 
 interface SelectPreferencePickerProps {
-  preference: NotificareUserPreference;
-  onChange: (preference: NotificareUserPreference, selectedOptions: NotificareUserPreferenceOption[]) => void;
+  preference: any;
+  onChange: (preference: any, selectedOptions: any[]) => void;
 }
 
 // endregion

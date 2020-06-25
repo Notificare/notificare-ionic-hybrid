@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { AppVersion } from '@ionic-native/app-version';
 import { EmailComposer } from '@ionic-native/email-composer';
-import { Notificare, NotificareDeviceDnD } from '@ionic-native/notificare';
+import { Notificare } from '@ionic-native/notificare';
 import { IonDatetime, IonItem, IonLabel, IonList, IonListHeader, IonSpinner, IonToggle } from '@ionic/react';
 import { Center } from '../../components/center';
 import { PageContainer } from '../../components/page-container';
@@ -319,7 +319,7 @@ interface SettingsData {
   useDoNotDisturb: boolean;
   isRemoteNotificationsEnabled: boolean;
   isLocationServicesEnabled: boolean;
-  dnd?: NotificareDeviceDnD;
+  dnd?: any;
   tags: string[];
   appVersion: string;
 }

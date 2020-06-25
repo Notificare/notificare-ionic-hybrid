@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Notificare, NotificareInboxItem } from '@ionic-native/notificare';
+import { Notificare } from '@ionic-native/notificare';
 import { IonList, IonSpinner, IonButton, IonIcon } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
 import Delete from '../../assets/icons/delete-24px.svg';
@@ -11,7 +11,7 @@ import { PageContainer } from '../../components/page-container';
 
 export const Inbox: FC<InboxProps> = () => {
   const [state, setState] = useState<InboxState>({ loading: false, data: [] });
-  const [selectedItems, setSelectedItems] = useState<NotificareInboxItem[]>([]);
+  const [selectedItems, setSelectedItems] = useState<any[]>([]);
 
   const reloadData = () => {
     setState({ loading: true, data: [] });
@@ -68,7 +68,7 @@ export const Inbox: FC<InboxProps> = () => {
     }, 250);
   };
 
-  const onItemClick = (item: NotificareInboxItem) => {
+  const onItemClick = (item: any) => {
     if (selectedItems.length > 0) {
       onItemLongPress(item);
       return;
@@ -77,7 +77,7 @@ export const Inbox: FC<InboxProps> = () => {
     Notificare.presentInboxItem(item);
   };
 
-  const onItemLongPress = (item: NotificareInboxItem) => {
+  const onItemLongPress = (item: any) => {
     const isSelected = selectedItems.includes(item);
 
     if (!isSelected) {
@@ -157,5 +157,5 @@ interface InboxProps extends RouteComponentProps {}
 
 interface InboxState {
   loading: boolean;
-  data: NotificareInboxItem[];
+  data: any[];
 }

@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { NotificareAsset } from '@ionic-native/notificare';
 import { IonCard, IonCardHeader, IonCardSubtitle, IonImg } from '@ionic/react';
 import AssetCss from '../../assets/images/asset_css.png';
 import AssetHtml from '../../assets/images/asset_html.png';
@@ -25,11 +24,11 @@ export const AssetItem: FC<AssetItemProps> = ({ asset, onClick }) => {
 };
 
 interface AssetItemProps {
-  asset: NotificareAsset;
+  asset: any;
   onClick: () => void;
 }
 
-function computeAssetImage(asset: NotificareAsset): string | undefined {
+function computeAssetImage(asset: any): string | undefined {
   const contentType = asset.assetMetaData?.contentType;
 
   switch (contentType) {
