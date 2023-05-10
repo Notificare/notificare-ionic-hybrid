@@ -51,7 +51,7 @@
     "react-timeago": "^4.4.0"
   },
   "devDependencies": {
-    "@capacitor/cli": "2.1.2",
+    "@capacitor/cli": "5.0.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^8.0.3",
